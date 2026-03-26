@@ -9,27 +9,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AuthenticationFilterFactory extends AbstractGatewayFilterFactory<AuthenticationFilterFactory.Config> {
+public class AuthenticationGatewayFilterFactory extends AbstractGatewayFilterFactory<AuthenticationGatewayFilterFactory.Config> {
 
     @Autowired
     private JwtUtil jwtUtil;
 
-    public AuthenticationFilterFactory() {
+    public AuthenticationGatewayFilterFactory() {
         super(Config.class);
-    }
-
-    @Override
-    public String name() {
-        return "Authentication";
     }
 
     @Override
     public GatewayFilter apply(Config config) {
         return ((exchange, chain) -> {
-            // Check if request requires authentication
             String path = exchange.getRequest().getURI().getPath();
-            if (!path.startsWith("/auth/") && !path.contains("/v3/api-docs")) {
-                // Check if Authorization header is present
+            if (!path.startsWith("/auth/")
+                    && !path.contains("/v3/api-docs")
+                    && !path.startsWith("/swagger-ui")
+                    && !path.startsWith("/webjars/")
+                    && !path.equals("/swagger-ui.html")) {
                 if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
                     exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                     return exchange.getResponse().setComplete();
@@ -41,7 +38,6 @@ public class AuthenticationFilterFactory extends AbstractGatewayFilterFactory<Au
                 }
 
                 try {
-                    // Validate token
                     jwtUtil.validateToken(authHeader);
                     String role = jwtUtil.extractRole(authHeader);
 
