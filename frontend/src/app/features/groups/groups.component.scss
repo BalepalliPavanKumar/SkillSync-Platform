@@ -1,0 +1,94 @@
+.groups-container {
+    padding-bottom: 40px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    
+    h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; color: #0b1120; }
+    .subtitle { color: #64748b; font-size: 0.95rem; }
+
+    button { border-radius: 8px; font-weight: 600; padding: 10px 24px; }
+}
+
+.groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 25px;
+}
+
+.group-card {
+    padding: 24px;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+    .group-header {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+
+        .group-avatar {
+            width: 50px;
+            height: 50px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #e71e30;
+            font-size: 1.1rem;
+        }
+
+        h3 { font-size: 1.1rem; font-weight: 700; margin: 0 0 4px 0; color: #0b1120; }
+        
+        .stats {
+            display: flex;
+            gap: 15px;
+            font-size: 0.8rem;
+            color: #64748b;
+
+            span {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                mat-icon { font-size: 16px; width: 16px; height: 16px; }
+            }
+
+            .active { color: #e71e30; font-weight: 600; }
+        }
+    }
+
+    .description {
+        font-size: 0.9rem;
+        color: #475569;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        height: 60px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    .tags {
+        margin-bottom: 24px;
+        mat-chip { --mdc-chip-label-text-size: 11px; --mdc-chip-container-height: 24px; }
+    }
+
+    .group-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        
+        .join-btn {
+            flex: 1;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+    }
+}

@@ -1,0 +1,40 @@
+<div class="groups-container">
+  <header class="page-header">
+    <div class="header-main">
+        <h1>Peer Learning Groups</h1>
+        <p class="subtitle">Connect with peers, share knowledge, and learn together in communities</p>
+    </div>
+    <button mat-flat-button color="primary">Create New Group</button>
+  </header>
+
+  <div class="groups-grid">
+    <mat-card *ngFor="let group of groups()" class="group-card">
+      <div class="group-header">
+        <div class="group-avatar">{{ group.image }}</div>
+        <div class="group-meta">
+          <h3>{{ group.name }}</h3>
+          <div class="stats">
+            <span><mat-icon>people</mat-icon> {{ group.members }} members</span>
+            <span *ngIf="group.activeSessions > 0" class="active">
+                <mat-icon>live_tv</mat-icon> {{ group.activeSessions }} live
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <p class="description">{{ group.description }}</p>
+
+      <mat-chip-set class="tags">
+        <mat-chip *ngFor="let tag of group.tags">{{ tag }}</mat-chip>
+      </mat-chip-set>
+
+      <div class="group-footer">
+        <button mat-button color="primary" *ngIf="group.joined">View Discussions</button>
+        <button mat-flat-button [color]="group.joined ? 'warn' : 'primary'" 
+                (click)="toggleJoin(group)" class="join-btn">
+          {{ group.joined ? 'Leave Group' : 'Join Community' }}
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>

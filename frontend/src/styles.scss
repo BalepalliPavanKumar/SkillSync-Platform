@@ -1,0 +1,50 @@
+/* Global Styles & Design Tokens */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+:root {
+  --primary: #e71e30; // SkillSync Red
+  --primary-dark: #cc1a2a;
+  --secondary: #0b1120; // Deep Navy
+  --bg-light: #f4f7fa;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --glass: rgba(255, 255, 255, 0.7);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-main);
+}
+
+// Material Theme Overrides
+.mat-mdc-button.mat-unthemed {
+    --mdc-filled-button-container-color: var(--primary);
+}
+
+.mat-mdc-flat-button {
+    height: 48px;
+    border-radius: 8px !important;
+}
+
+.mat-mdc-form-field {
+    width: 100%;
+}
+
+.mat-mdc-text-field-wrapper {
+    background-color: white !important;
+}
+
+// Helper classes
+.full-width {
+  width: 100%;
+}
+
+.glass-card {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}

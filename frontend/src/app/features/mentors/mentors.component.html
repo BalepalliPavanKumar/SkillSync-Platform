@@ -1,0 +1,81 @@
+<div class="mentors-container">
+  <header class="page-header">
+    <h1>Find a Mentor</h1>
+    <p class="subtitle">Discover expert mentors matched to your learning goals</p>
+  </header>
+
+  <!-- Search and Filters Section -->
+  <section class="filters-section">
+    <div class="search-bar">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput placeholder="Java, Spring Boot, React..." (input)="onSearch($event)">
+      </mat-form-field>
+      <button mat-flat-button color="primary" class="filter-btn">
+        <mat-icon>tune</mat-icon> Filters
+      </button>
+    </div>
+
+    <div class="chips-container">
+        <mat-chip-listbox>
+            <mat-chip-option *ngFor="let s of skills" 
+                [selected]="selectedSkill() === s"
+                (click)="selectSkill(s)"
+                color="primary">
+                {{ s }}
+            </mat-chip-option>
+        </mat-chip-listbox>
+        
+        <button mat-button color="warn" class="clear-btn" (click)="selectedSkill.set('All')">Clear All</button>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <div class="results-info">
+    <span>Showing <strong>{{ filteredMentors().length }} mentors</strong> matching your criteria</span>
+    <mat-form-field appearance="outline" class="sort-field">
+        <mat-select value="relevant">
+            <mat-option value="relevant">Most Relevant</mat-option>
+            <mat-option value="rating">Top Rated</mat-option>
+            <mat-option value="price">Lowest Price</mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="mentors-grid">
+    <mat-card *ngFor="let mentor of filteredMentors()" class="mentor-card glass-card">
+      <div class="availability" *ngIf="mentor.available">
+        <span class="dot"></span> Available
+      </div>
+      
+      <div class="mentor-header">
+        <div class="avatar" [style.background-color]="'#0b1120'">{{ mentor.image }}</div>
+        <div class="info">
+          <h3>{{ mentor.name }}</h3>
+          <p>{{ mentor.role }}</p>
+        </div>
+      </div>
+
+      <div class="rating-row">
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star_half</mat-icon>
+        <span class="count">{{ mentor.rating }} ({{ mentor.reviews }})</span>
+      </div>
+
+      <mat-chip-set class="skill-chips">
+        <mat-chip *ngFor="let skill of mentor.skills">{{ skill }}</mat-chip>
+      </mat-chip-set>
+
+      <div class="mentor-footer">
+        <div class="rate">₹{{ mentor.rate }}/hr</div>
+        <div class="actions">
+            <button mat-stroked-button color="warn">View</button>
+            <button mat-flat-button color="warn">Book</button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

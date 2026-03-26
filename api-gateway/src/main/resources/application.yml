@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: api-gateway
+  config:
+    import: "optional:configserver:http://localhost:8888"
+  cloud:
+    gateway:
+      routes:
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/users/**
+        - id: mentor-service
+          uri: lb://MENTOR-SERVICE
+          predicates:
+            - Path=/mentors/**
+        - id: skill-service
+          uri: lb://SKILL-SERVICE
+          predicates:
+            - Path=/skills/**
+        - id: session-service
+          uri: lb://SESSION-SERVICE
+          predicates:
+            - Path=/sessions/**
+        - id: group-service
+          uri: lb://GROUP-SERVICE
+          predicates:
+            - Path=/groups/**
+        - id: review-service
+          uri: lb://REVIEW-SERVICE
+          predicates:
+            - Path=/reviews/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true

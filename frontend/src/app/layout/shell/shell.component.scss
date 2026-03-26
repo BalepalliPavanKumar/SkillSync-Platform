@@ -1,0 +1,126 @@
+.shell-container {
+    height: 100vh;
+    width: 100vw;
+}
+
+.side-nav {
+    width: 260px;
+    background: #0b1120;
+    color: white;
+    border-right: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    padding: 30px 20px;
+    text-align: center;
+    
+    .logo {
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin: 0;
+        letter-spacing: -1px;
+        color: white;
+        
+        span {
+            color: #e71e30;
+        }
+    }
+}
+
+.nav-list {
+    flex: 1;
+    padding-top: 20px;
+
+    a {
+        margin: 4px 12px;
+        border-radius: 8px;
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 0.2s ease;
+
+        mat-icon {
+            color: inherit;
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        &.active-link {
+            background: rgba(231, 30, 48, 0.1);
+            color: #e71e30;
+            font-weight: 600;
+
+            mat-icon {
+                color: #e71e30;
+            }
+        }
+    }
+}
+
+.user-info {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        background: #e71e30;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: white;
+    }
+
+    .details {
+        flex: 1;
+        overflow: hidden;
+
+        p {
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .name {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .role {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+    }
+
+    button {
+        color: rgba(255, 255, 255, 0.5);
+        &:hover { color: white; }
+    }
+}
+
+.header {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    height: 64px;
+}
+
+.main-content {
+    padding: 24px;
+    background: #f8fafc;
+    min-height: calc(100vh - 64px);
+    overflow-y: auto;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}

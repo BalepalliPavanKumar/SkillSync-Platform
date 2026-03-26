@@ -1,0 +1,168 @@
+{
+  "baseUrl": "http://localhost:8080",
+  "auth-service": {
+    "register": [
+      {
+        "name": "Learner One",
+        "email": "learner@example.com",
+        "password": "pass123",
+        "role": "ROLE_LEARNER"
+      },
+      {
+        "name": "Mentor One",
+        "email": "mentor@example.com",
+        "password": "pass123",
+        "role": "ROLE_MENTOR"
+      },
+      {
+        "name": "Admin One",
+        "email": "admin@example.com",
+        "password": "pass123",
+        "role": "ROLE_ADMIN"
+      }
+    ],
+    "login": {
+      "email": "learner@example.com",
+      "password": "pass123"
+    },
+    "refresh": {
+      "authorizationHeader": "Bearer <JWT_TOKEN>"
+    }
+  },
+  "user-service": {
+    "createUserProfile": [
+      {
+        "userId": 1,
+        "name": "Learner One",
+        "email": "learner@example.com",
+        "phone": "9999999999",
+        "role": "ROLE_LEARNER",
+        "skills": "Java,Spring Boot",
+        "profileImageUrl": "http://example.com/learner.jpg"
+      },
+      {
+        "userId": 2,
+        "name": "Mentor One",
+        "email": "mentor@example.com",
+        "phone": "8888888888",
+        "role": "ROLE_MENTOR",
+        "skills": "Spring Boot,Microservices",
+        "profileImageUrl": "http://example.com/mentor.jpg"
+      },
+      {
+        "userId": 3,
+        "name": "Admin One",
+        "email": "admin@example.com",
+        "phone": "7777777777",
+        "role": "ROLE_ADMIN",
+        "skills": "Management",
+        "profileImageUrl": "http://example.com/admin.jpg"
+      }
+    ],
+    "updateUserProfile": {
+      "name": "Learner One Updated",
+      "skills": "Java,Spring Boot,Microservices",
+      "profileImageUrl": "http://example.com/learner-updated.jpg"
+    }
+  },
+  "skill-service": {
+    "createSkill": [
+      {
+        "name": "Spring Boot",
+        "category": "Backend"
+      },
+      {
+        "name": "Java",
+        "category": "Programming"
+      }
+    ]
+  },
+  "mentor-service": {
+    "applyMentor": {
+      "userId": 2,
+      "bio": "Backend expert with 5 years experience",
+      "experience": 5,
+      "hourlyRate": 40
+    },
+    "setAvailability": {
+      "pathParam": {
+        "id": 1
+      },
+      "queryParam": {
+        "availability": "Mon-Fri 6PM-9PM"
+      }
+    },
+    "searchMentors": {
+      "queryParamsExample": "skill=Spring%20Boot&minRating=0&maxPrice=100&availability=Mon-Fri%206PM-9PM"
+    }
+  },
+  "session-service": {
+    "createSession": {
+      "mentorId": 1,
+      "learnerId": 1,
+      "sessionDate": "2026-04-01T10:00:00"
+    },
+    "acceptSession": {
+      "pathParam": {
+        "id": 1
+      }
+    },
+    "rejectSession": {
+      "pathParam": {
+        "id": 1
+      }
+    },
+    "completeSession": {
+      "pathParam": {
+        "id": 1
+      }
+    },
+    "cancelSession": {
+      "pathParam": {
+        "id": 1
+      }
+    },
+    "remindSession": {
+      "pathParam": {
+        "id": 1
+      }
+    }
+  },
+  "review-service": {
+    "createReview": {
+      "mentorId": 1,
+      "userId": 1,
+      "rating": 5,
+      "comment": "Very helpful session"
+    }
+  },
+  "group-service": {
+    "createGroup": {
+      "name": "Spring Boot Beginners",
+      "description": "Group for beginners",
+      "createdBy": 1
+    },
+    "joinGroup": {
+      "pathParam": {
+        "id": 1
+      }
+    },
+    "leaveGroup": {
+      "pathParam": {
+        "id": 1
+      }
+    },
+    "postMessage": {
+      "pathParam": {
+        "id": 1
+      },
+      "body": {
+        "userId": 1,
+        "content": "Hello everyone! Happy to join."
+      }
+    }
+  },
+  "notification-service": {
+    "note": "This service is event-driven. Verify logs when sessions or mentor approvals happen."
+  }
+}

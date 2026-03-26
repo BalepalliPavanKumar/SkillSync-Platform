@@ -11,12 +11,17 @@ public class UserProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private Long userId; // from Auth Service
 
     private String name;
+
+    @Column(unique = true, nullable = false)
     private String email;
     private String phone;
     private String role;
+    private String skills; // comma-separated list
+    private String profileImageUrl;
 
     // Getters & Setters
 
@@ -36,4 +41,10 @@ public class UserProfile {
 
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
+
+    public String getSkills() { return skills; }
+    public void setSkills(String skills) { this.skills = skills; }
+
+    public String getProfileImageUrl() { return profileImageUrl; }
+    public void setProfileImageUrl(String profileImageUrl) { this.profileImageUrl = profileImageUrl; }
 }

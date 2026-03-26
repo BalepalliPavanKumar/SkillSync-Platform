@@ -1,0 +1,42 @@
+<mat-sidenav-container class="shell-container">
+  <!-- Sidebar -->
+  <mat-sidenav mode="side" opened class="side-nav">
+    <div class="brand">
+      <h2 class="logo">Skill<span>Sync</span></h2>
+    </div>
+
+    <mat-nav-list class="nav-list">
+      <a mat-list-item *ngFor="let item of menuItems" 
+         [routerLink]="item.route" 
+         routerLinkActive="active-link">
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle>{{ item.label }}</span>
+      </a>
+    </mat-nav-list>
+
+    <div class="user-info">
+        <div class="avatar">{{ authStore.user()?.username?.[0]?.toUpperCase() || 'U' }}</div>
+        <div class="details">
+            <p class="name">{{ authStore.user()?.username }}</p>
+            <p class="role">{{ authStore.isAdmin() ? 'Administrator' : 'Learner' }}</p>
+        </div>
+        <button mat-icon-button (click)="logout()">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </div>
+  </mat-sidenav>
+
+  <!-- Main Content Area -->
+  <mat-sidenav-content>
+    <mat-toolbar class="header">
+      <span class="spacer"></span>
+      <button mat-icon-button class="notification-btn">
+        <mat-icon matBadge="3" matBadgeColor="warn">notifications</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,95 @@
+<div class="dashboard-wrapper">
+  <header class="dashboard-header">
+    <div class="greeting">
+      <h1>Good morning, {{ authStore.user()?.username || 'Learner' }}! 👋</h1>
+      <p class="subtitle">Monday, March 24, 2025 — Here's your learning overview.</p>
+    </div>
+  </header>
+
+  <!-- Stat Cards -->
+  <div class="stats-grid">
+    <mat-card *ngFor="let stat of stats()" class="stat-card">
+      <div class="stat-icon" [style.background-color]="stat.color + '1a'">
+        <mat-icon [style.color]="stat.color">{{ stat.icon }}</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="value">{{ stat.value }}</span>
+        <span class="label">{{ stat.label }}</span>
+        <span class="trend" [style.color]="stat.color">↑ {{ stat.trend }}</span>
+      </div>
+    </mat-card>
+  </div>
+
+  <!-- Main Section: Two Columns -->
+  <div class="dashboard-main">
+    
+    <!-- Recommended Mentors -->
+    <section class="mentors-section">
+      <div class="section-header">
+        <h2>Recommended Mentors</h2>
+        <button mat-button color="primary">View All</button>
+      </div>
+      
+      <div class="mentors-grid">
+        <mat-card *ngFor="let mentor of recommendedMentors()" class="mentor-card">
+          <div class="mentor-header">
+            <div class="mentor-avatar">{{ mentor.image }}</div>
+            <div class="mentor-meta">
+              <h3>{{ mentor.name }}</h3>
+              <p>{{ mentor.role }}</p>
+            </div>
+          </div>
+          <div class="rating">
+            <mat-icon>star</mat-icon>
+            <span>{{ mentor.rating }} ({{ mentor.reviews }} reviews)</span>
+          </div>
+          <mat-chip-set>
+            <mat-chip *ngFor="let skill of mentor.skills">{{ skill }}</mat-chip>
+          </mat-chip-set>
+          <div class="mentor-footer">
+            <span class="rate">₹{{ mentor.rate }}/hr</span>
+            <button mat-flat-button color="primary">Book Session</button>
+          </div>
+        </mat-card>
+      </div>
+    </section>
+
+    <!-- Upcoming Sessions -->
+    <section class="sessions-section">
+      <div class="section-header">
+        <h2>Upcoming Sessions</h2>
+      </div>
+      
+      <mat-card class="sessions-card">
+        <table class="sessions-table">
+          <thead>
+            <tr>
+              <th>Date & Time</th>
+              <th>Mentor</th>
+              <th>Topic</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let session of upcomingSessions()">
+              <td>
+                <div class="date-cell">
+                  <mat-icon>calendar_today</mat-icon>
+                  <span>{{ session.date }} • {{ session.time }}</span>
+                </div>
+              </td>
+              <td>{{ session.mentor }}</td>
+              <td>{{ session.topic }}</td>
+              <td>
+                <span class="status-badge" [class]="session.status.toLowerCase()">
+                  {{ session.status }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card>
+    </section>
+
+  </div>
+</div>
